@@ -1,0 +1,156 @@
+
+
+#include <iostream>
+
+using namespace std;
+
+
+class GasStation
+
+{
+
+private:
+
+double time;
+
+public:
+
+GasStation(double time) { this->time = time; };
+
+double GetTime() { return time; }
+
+void SetTime(double time) { this->time = time; }
+
+};
+
+class Car
+
+{
+
+protected:
+
+int liters;
+
+int full;
+
+public:
+
+Car() { };
+
+Car(int liters) { this->liters = liters; };
+
+void SetLiters(int l) { liters = l; }
+
+int GetLiters() { return liters; }
+
+int GetFull() { return full; }
+
+double CalcTime(GasStation gs)
+
+{
+
+int need = full - liters;
+
+double seconds = need * gs.GetTime();
+
+return seconds;
+
+};
+
+};
+
+class Ford : public Car
+
+{
+
+private:
+
+const int f = 55;
+
+public:
+
+Ford(int liters) : Car(liters)
+
+{
+
+this->full = f;
+
+};
+
+int GetF() { return f; };
+
+};
+
+class Mazda : public Car
+
+{
+
+private:
+
+const int f = 50;
+
+public:
+
+Mazda(int liters) : Car(liters)
+
+{
+
+this->full = f;
+
+};
+
+int GetF() { return f; };
+
+};
+
+int main()
+
+{
+
+setlocale(LC_ALL, "Russian");
+
+double t;
+
+cout << "Время наполнения бака на 1 л. для бензоколонки (секунды): ";
+
+cin >> t;
+
+GasStation g(t);
+
+int lf, lm;
+
+cout << "\nКол-во имеющихся литров бензина в баке Форда: ";
+
+cin >> lf;
+
+Ford f(lf);
+
+cout << "Кол-во имеющихся литров бензина в баке Мазды: ";
+
+cin >> lm;
+
+Mazda m(lm);
+
+int c = 0;
+
+cout << "\n1. Время наполнения бака Форда\n";
+
+cout << "2. Время наполнения бака Мазды\n";
+
+cout << "Введите номер команды: ";
+
+cin >> c;
+
+if (c == 1)
+
+cout << f.CalcTime(g) << " секунд " << endl;
+
+else
+
+cout << m.CalcTime(g) << " секунд " << endl;
+
+system("pause");
+
+return 0;
+
+}
